@@ -1,0 +1,27 @@
+{
+  "name": "shopping-cart-api",
+  "version": "1.0.0",
+  "description": "NodeJS RESTful API for a shopping cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danivijay/shopping-cart-api.git"
+  },
+  "keywords": [
+    "node",
+    "rest",
+    "api"
+  ],
+  "author": "Dani Vijay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danivijay/shopping-cart-api/issues"
+  },
+  "homepage": "https://github.com/danivijay/shopping-cart-api#readme",
+  "dependencies": {
+    "express": "4.16.2"
+  }
+}

@@ -23,9 +23,14 @@
   },
   "homepage": "https://github.com/danivijay/shopping-cart-api#readme",
   "dependencies": {
-    "express": "4.16.2"
+    "body-parser": "1.18.2",
+    "cors": "2.8.4",
+    "express": "4.16.2",
+    "mongoose": "5.0.3",
+    "morgan": "1.9.0"
   },
   "devDependencies": {
-    "eslint": "4.17.0"
+    "eslint": "4.17.0",
+    "nodemon": "1.14.12"
   }
 }

@@ -54,15 +54,26 @@ router.get('/:productId', (req, res, next) => {
 
 router.patch('/:productId', (req, res, next) => {
   const id = req.params.productId
-  Product.findByIdAndUpdate(_id = id, req.body, {new: true})
-    .exec()  
-    .then(doc => {
-      res.status(200).json(doc)
-    })
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ error: err })
-    })
+  const newProduct = {}
+  if (req.body.name) {
+    newProduct.name = req.body.name
+  }
+  if (req.body.price) {
+    newProduct.price = req.body.price
+  }
+  if(Object.getOwnPropertyNames(newProduct).length !== 0) {
+    Product.findByIdAndUpdate(_id = id, newProduct, {new: true})
+      .exec()  
+      .then(doc => {
+        res.status(200).json(doc)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: err })
+      })
+  } else {
+    res.status(200).json({ error: 'Nothing to update' })
+  }
 })
 
 router.delete('/:productId', (req, res, next) => {

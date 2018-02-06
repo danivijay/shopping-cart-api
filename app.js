@@ -15,6 +15,7 @@ const app = express()
 mongoPw = process.env.MONGO_ATLAS_PW || 'node-shop'
 
 mongoose.connect('mongodb://node-shop:'+ mongoPw +'@node-rest-shop-shard-00-00-6p4bs.mongodb.net:27017,node-rest-shop-shard-00-01-6p4bs.mongodb.net:27017,node-rest-shop-shard-00-02-6p4bs.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin')
+mongoose.Promise = global.Promise
 
 app.use(cors())
 app.use(morgan('dev'))

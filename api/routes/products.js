@@ -1,11 +1,38 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const Product = require('../models/product')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
+    cb(null, true); // accept file
+  } else {
+    cb(null, false) // reject file
+  }
+}
+
+const upload = multer({
+    storage: storage,
+    limits: {
+      fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+  })
 
 const router = express.Router()
 
 router.get('/', (req, res, next) => {
   Product.find({})
+    .select('_id name price productImage')
     .exec()
     .then( docs => {
       console.log(docs)
@@ -16,10 +43,12 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', upload.single('productImage'), (req, res, next) => {
+  console.log(req.file)
   const product = new Product({
     name: req.body.name,
-    price: req.body.price
+    price: req.body.price,
+    productImage: req.file.path
   })
   product.save()
     .then(reuslt => {
@@ -37,6 +66,7 @@ router.post('/', (req, res, next) => {
 router.get('/:productId', (req, res, next) => {
   const id = req.params.productId
   Product.findById(id)
+    .select('_id name price productImage')
     .exec()
     .then(doc => {
       console.log(doc)

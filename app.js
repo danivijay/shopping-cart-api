@@ -4,8 +4,9 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-const productsRoutes = require('./api/routes/products')
-const ordersRoutes = require('./api/routes/orders')
+const productRoutes = require('./api/routes/products')
+const orderRoutes = require('./api/routes/orders')
+const userRoutes = require('./api/routes/user')
 
 const app = express()
 
@@ -24,8 +25,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 
-app.use('/products', productsRoutes)
-app.use('/orders', ordersRoutes)
+app.use('/products', productRoutes)
+app.use('/orders', orderRoutes)
+app.use('/user', userRoutes)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

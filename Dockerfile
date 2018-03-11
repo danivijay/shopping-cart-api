@@ -1,15 +1,19 @@
-FROM alpine:3.7
+FROM node:carbon
 
-LABEL maintainer: "danimvijay@gmail.com"
+# Create app directory
+WORKDIR /usr/src/app
 
-RUN apk add --update nodejs nodejs-npm
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-COPY . /src
+# RUN npm install
+# If you are building your code for production
+RUN npm install --only=production
 
-WORKDIR /src
-
-RUN npm install
+# Bundle app source
+COPY . .
 
 EXPOSE 3000
-
-ENTRYPOINT [ "node", "./server.js" ]
+CMD [ "npm", "start" ]

@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
 
+const jwtKey = process.env.JWT_KEY || 'secret'
+
 exports.user_signup = (req, res, next) => {
   User.find({email: req.body.email})
     .exec()
@@ -61,7 +63,7 @@ exports.user_login = (req, res, next) => {
                 email: user[0].email,
                 userid: user[0]._id,
               }, 
-              process.env.JWT_KEY,
+              jwtKey,
               {
                 expiresIn: "1h"
               })

@@ -13,7 +13,7 @@ const app = express()
 // mongoose.connect('mongodb+srv://node-shop:' + 
 //   process.env.MONGO_ATLAS_PW + 
 //   '@node-rest-shop-6p4bs.mongodb.net/test')
-mongoPw = process.env.MONGO_ATLAS_PW
+mongoPw = process.env.MONGO_ATLAS_PW || 'node-shop'
 
 mongoose.connect('mongodb://node-shop:'+ mongoPw +'@node-rest-shop-shard-00-00-6p4bs.mongodb.net:27017,node-rest-shop-shard-00-01-6p4bs.mongodb.net:27017,node-rest-shop-shard-00-02-6p4bs.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin')
 mongoose.Promise = global.Promise

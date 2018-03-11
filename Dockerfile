@@ -17,4 +17,4 @@ RUN ls
 RUN pwd
 
 EXPOSE 3000
-CMD [ "npm", "server.js" ]
+CMD [ "node", "server.js" ]
